@@ -28,7 +28,7 @@ export default function LoginPage() {
 
     try {
       await signIn(formData.email, formData.password);
-      // Redirect will be handled by auth state change
+      window.location.href = '/';
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Login failed';
       console.error('Login error:', err);
@@ -43,7 +43,7 @@ export default function LoginPage() {
     setError('');
     try {
       await signInWithGoogle();
-      // OAuth will handle redirect automatically
+      // OAuth will redirect, so no need to manually redirect
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Google sign-in failed';
       console.error('Google sign-in error:', err);

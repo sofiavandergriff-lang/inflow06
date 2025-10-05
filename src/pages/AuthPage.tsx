@@ -41,7 +41,7 @@ export default function AuthPage({ onNavigate }: AuthPageProps) {
         }
         await signUp(formData.email, formData.password, formData.username);
       }
-      // Redirect will be handled by auth state change
+      onNavigate('home');
     } catch (err) {
       if (err instanceof Error) {
         if (err.message.includes('Email not confirmed')) {
@@ -61,7 +61,7 @@ export default function AuthPage({ onNavigate }: AuthPageProps) {
     try {
       setError('');
       await signInWithGoogle();
-      // OAuth will handle redirect automatically
+      onNavigate('home');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Google sign-in failed');
     }

@@ -35,18 +35,10 @@ export default function SignupPage() {
         throw new Error('You must agree to the Privacy Policy to create an account');
       }
       await signUp(formData.email, formData.password, formData.username);
-      
-      // Show success message and redirect to login
-      const successMsg = document.createElement('div');
-      successMsg.innerHTML = '✅ Your account has been created. Please log in to continue.';
-      successMsg.className = 'fixed top-4 right-4 bg-green-50 border border-green-200 text-green-600 px-4 py-2 rounded-lg z-50';
-      document.body.appendChild(successMsg);
-      
-      setTimeout(() => {
-        successMsg.remove();
-        window.location.href = '/login';
-      }, 2000);
-      
+      // Show success message instead of immediate redirect
+      setError('');
+      alert('Account created successfully! Please check your email for verification if required.');
+      window.location.href = '/';
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Signup failed';
       console.error('Signup error:', err);
@@ -61,7 +53,7 @@ export default function SignupPage() {
     setError('');
     try {
       await signInWithGoogle();
-      // OAuth will handle redirect automatically
+      // OAuth will redirect, so no need to manually redirect
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Google sign-in failed';
       console.error('Google sign-in error:', err);
